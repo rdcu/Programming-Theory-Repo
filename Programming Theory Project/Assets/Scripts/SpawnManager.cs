@@ -6,7 +6,8 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject[] projectilePrefabs;
     private float startDelay = 2;
-    private float spawnInterval = 4;
+    private float spawnInterval = 4.5f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +24,9 @@ public class SpawnManager : MonoBehaviour
     void SpawnRandomProjectile()
     {
         int projectileIndex = Random.Range(0, projectilePrefabs.Length);
-        Vector3 spawnPos = new Vector3(21, 1.5f, 0);
+        Vector3 spawnPos = new Vector3(21, 1, 0);
 
         Instantiate(projectilePrefabs[projectileIndex], spawnPos, projectilePrefabs[projectileIndex].transform.rotation);
     }
+
 }
