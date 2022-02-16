@@ -5,11 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject hitZone;
+    private float jumpForce = 7.5f;
+    private Rigidbody playerRb;
+    private bool isOnGround;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,11 @@ public class PlayerController : MonoBehaviour
         {
             UnParry();
         }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Jump();
+        }
     }
 
     void Parry()
@@ -34,5 +42,24 @@ public class PlayerController : MonoBehaviour
     void UnParry()
     {
         hitZone.SetActive(false);
+    }
+
+    void Jump()
+    {
+        {
+            if (isOnGround)
+            {
+                playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                isOnGround = false;
+            }
+        }    
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        }
     }
 }
