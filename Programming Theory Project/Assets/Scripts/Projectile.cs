@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
+    // INHERITANCE (Entire script)
     private float m_speed = 5;
+    // Encapsulation
     public float speed
     {
         get { return m_speed; }
@@ -22,6 +25,7 @@ public class Projectile : MonoBehaviour
     }
     
 
+    // Polymorphism
     public virtual void MoveLeft()
     {
         transform.Translate(Vector3.left * m_speed * Time.deltaTime);
@@ -32,5 +36,11 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
- 
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

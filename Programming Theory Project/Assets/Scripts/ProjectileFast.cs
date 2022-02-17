@@ -16,6 +16,7 @@ public class ProjectileFast : Projectile
         MoveLeft();
     }
 
+    // Polymorphism
     public override void MoveLeft()
     {
         transform.Translate(Vector3.left * speed * 2 * Time.deltaTime);
